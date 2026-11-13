@@ -15,8 +15,8 @@ for (const [path, heading, src] of [['/index.html', 'やりたいことを', 'lp
   vm.runInNewContext(source, { location: { pathname: path }, document });
   assert.ok(target.innerHTML.includes(heading), `${path}: page heading`);
   assert.equal((target.innerHTML.match(/class="scene"/g) || []).length, 6);
-  const positions = [...target.innerHTML.matchAll(/class="scene-photo"[^>]*background-position:([^"]+)/g)].map(m => m[1]);
-  assert.equal(positions.length, 2, `${path}: two distinct scene photographs`);
+  const positions = [...target.innerHTML.matchAll(/class="scene-photo"[^>]*background-image:url\(assets\/([^)]*)\);background-position:([^"]+)/g)].map(m => m[1] + ":" + m[2]);
+  assert.equal(positions.length, 6, `${path}: six distinct scene photographs`);
   for (const position of positions) { assert.ok(!scenePositionsSeen.has(position), `scene photograph repeated: ${position}`); scenePositionsSeen.add(position); }
   const photos = [...target.innerHTML.matchAll(/<img src="assets\/([^"]+)/g)].map(m => m[1]);
   assert.equal(new Set(photos).size, photos.length, `${path}: repeated image`);
