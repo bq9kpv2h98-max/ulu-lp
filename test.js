@@ -8,12 +8,19 @@ assert.ok(!source.includes('保険'));
 for (const file of ['index.html', 'back.html', 'shoulder.html', 'style.css', 'assets/clinic.jpg']) assert.ok(fs.existsSync(file));
 console.log('LP content checks passed');
 const vm = require('node:vm');
+const scenePositionsSeen = new Set();
 for (const [path, heading, src] of [['/index.html', 'やりたいことを', 'lp_top'], ['/back.html', '「腰が気になるから」', 'lp_youtu'], ['/shoulder.html', '首や肩の重さを気にせず', 'lp_katakori']]) {
   const target = { innerHTML: '' };
   const document = { title: '', querySelector: () => target };
   vm.runInNewContext(source, { location: { pathname: path }, document });
   assert.ok(target.innerHTML.includes(heading), `${path}: page heading`);
   assert.equal((target.innerHTML.match(/class="scene"/g) || []).length, 6);
+  const positions = [...target.innerHTML.matchAll(/class="scene-photo"[^>]*background-position:([^"]+)/g)].map(m => m[1]);
+  assert.equal(positions.length, 2, `${path}: two distinct scene photographs`);
+  for (const position of positions) { assert.ok(!scenePositionsSeen.has(position), `scene photograph repeated: ${position}`); scenePositionsSeen.add(position); }
+  const photos = [...target.innerHTML.matchAll(/<img src="assets\/([^"]+)/g)].map(m => m[1]);
+  assert.equal(new Set(photos).size, photos.length, `${path}: repeated image`);
+  assert.ok(fs.readFileSync(path.slice(1), 'utf8').includes('data-theme="' + (src === 'lp_top' ? 'general' : src === 'lp_youtu' ? 'back' : 'shoulder') + '"'));
   assert.equal((target.innerHTML.match(/初回予約はこちら/g) || []).length, 3);
   assert.equal((target.innerHTML.match(new RegExp('https://appointment-system.net/book\\?src=' + src, 'g')) || []).length, 3);
   assert.ok(fs.readFileSync(path.slice(1), 'utf8').includes('https://appointment-system.net/book?src=' + src));
