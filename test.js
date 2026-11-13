@@ -16,5 +16,14 @@ for (const [path, heading] of [['/index.html', 'やりたいことを'], ['/back
   assert.equal((target.innerHTML.match(/class="scene"/g) || []).length, 6);
   assert.equal((target.innerHTML.match(/LINEで初回相談・予約/g) || []).length, 3);
   assert.ok(target.innerHTML.includes('ULU METHOD'));
+  assert.equal((target.innerHTML.match(/class="button shimmer-button"/g) || []).length, 3);
+  assert.ok(target.innerHTML.includes('maps.google.com/maps?q='));
+  assert.ok(target.innerHTML.includes('google.com/maps/search/'));
 }
 console.log('Three page variants render correctly');
+
+const css = fs.readFileSync('style.css', 'utf8');
+assert.ok(css.includes('prefers-reduced-motion'));
+assert.ok(css.includes('KleeOne-Regular-subset.ttf'));
+assert.ok(css.includes('KleeOne-SemiBold-subset.ttf'));
+console.log('Motion, font and map checks passed');
