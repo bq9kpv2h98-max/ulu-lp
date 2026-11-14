@@ -26,8 +26,8 @@ for (const [path, heading, src] of [['/index.html', 'やりたいことを', 'lp
   const pageHtml = fs.readFileSync(path.slice(1), 'utf8');
   assert.equal((pageHtml.match(new RegExp('https://appointment-system.net/book\\?src=' + src, 'g')) || []).length, 6, `${path}: all booking links`);
   assert.ok(pageHtml.includes('class="mobile-booking"'));
-  assert.ok(!pageHtml.includes('googletagmanager.com'));
-  assert.ok(!pageHtml.includes('tracking.js'));
+  assert.ok(pageHtml.includes('GTM-WN6FW2GV'));
+  assert.ok(pageHtml.includes('tracking.js'));
   assert.ok(pageHtml.includes('<span>駐車場あり</span>'));
   assert.equal((pageHtml.match(/予約前にLINEで相談する/g) || []).length, 2);
   assert.ok(pageHtml.includes('LINEでのご相談はこちら'));
