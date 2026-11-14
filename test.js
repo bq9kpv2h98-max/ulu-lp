@@ -24,8 +24,11 @@ for (const [path, heading, src] of [['/index.html', 'やりたいことを', 'lp
   assert.equal((target.innerHTML.match(/初回予約はこちら/g) || []).length, 3);
   assert.equal((target.innerHTML.match(new RegExp('https://appointment-system.net/book\\?src=' + src, 'g')) || []).length, 3);
   const pageHtml = fs.readFileSync(path.slice(1), 'utf8');
-  assert.equal((pageHtml.match(new RegExp('https://appointment-system.net/book\\?src=' + src, 'g')) || []).length, 2, `${path}: header and mobile booking links`);
+  assert.equal((pageHtml.match(new RegExp('https://appointment-system.net/book\\?src=' + src, 'g')) || []).length, 3, `${path}: header, mobile and desktop booking links`);
   assert.ok(pageHtml.includes('class="mobile-booking"'));
+  assert.ok(pageHtml.includes('class="desktop-left"'));
+  assert.ok(pageHtml.includes('class="desktop-right"'));
+  for (const id of ['top','vision','scenes','method','first-visit','price','access','faq']) assert.ok(target.innerHTML.includes('id="' + id + '"'), `${path}: missing section ${id}`);
   for (const image of positions) assert.ok(fs.existsSync('assets/' + image.split(':')[0]), `${path}: missing scene image`);
   assert.ok(target.innerHTML.includes('ULU METHOD'));
   assert.equal((target.innerHTML.match(/class="button shimmer-button"/g) || []).length, 3);
