@@ -59,3 +59,6 @@ body[data-theme="shoulder"]{--ink:#303b4d;--green:#667795;--deep:#394b68;--muted
 .logo{display:inline-flex;align-items:center;flex:none;line-height:0}.logo img{display:block;width:136px;height:auto}footer .logo img{width:160px}.rail-brand{display:inline-flex;align-items:center;line-height:0}.rail-brand img{display:block;width:176px;max-width:100%;height:auto}
 @media(max-width:700px), (min-width:1024px){header .logo img{width:128px}}
 @media(max-width:360px){header .logo img{width:112px}}
+
+/* Readable search intent and secondary consultation links. */
+.hero-copy .eyebrow{font-size:16px;color:var(--ink);letter-spacing:.02em;line-height:1.7}.line-consult{margin:var(--s2) 0!important;font-size:14px}.line-consult a{color:inherit;text-underline-offset:4px}.hero-copy .note a,.faq .answer a{text-underline-offset:4px}
