@@ -23,7 +23,10 @@ for (const [path, heading, src] of [['/index.html', 'やりたいことを', 'lp
   assert.ok(fs.readFileSync(path.slice(1), 'utf8').includes('data-theme="' + (src === 'lp_top' ? 'general' : src === 'lp_youtu' ? 'back' : 'shoulder') + '"'));
   assert.equal((target.innerHTML.match(/初回予約はこちら/g) || []).length, 3);
   assert.equal((target.innerHTML.match(new RegExp('https://appointment-system.net/book\\?src=' + src, 'g')) || []).length, 3);
-  assert.ok(fs.readFileSync(path.slice(1), 'utf8').includes('https://appointment-system.net/book?src=' + src));
+  const pageHtml = fs.readFileSync(path.slice(1), 'utf8');
+  assert.equal((pageHtml.match(new RegExp('https://appointment-system.net/book\\?src=' + src, 'g')) || []).length, 2, `${path}: header and mobile booking links`);
+  assert.ok(pageHtml.includes('class="mobile-booking"'));
+  for (const image of positions) assert.ok(fs.existsSync('assets/' + image.split(':')[0]), `${path}: missing scene image`);
   assert.ok(target.innerHTML.includes('ULU METHOD'));
   assert.equal((target.innerHTML.match(/class="button shimmer-button"/g) || []).length, 3);
   assert.ok(target.innerHTML.includes('maps.google.com/maps?q='));

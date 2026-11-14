@@ -26,3 +26,16 @@ body[data-theme="shoulder"]{--ink:#303b4d;--green:#667795;--deep:#394b68;--muted
 .hero-photo img{animation:image-enter 1.4s ease both}.hero-copy h1{animation:editorial-reveal 1s ease both}.story-image.is-revealed{animation:image-enter 1.2s ease both}.section-head.is-revealed,.step.is-revealed{animation:line-enter .8s ease both}.scene:nth-child(even).is-revealed,.point:nth-child(even).is-revealed{animation-delay:.12s}.feature-pair span{transition:transform .6s ease,border-color .6s ease}.feature-pair:hover span:first-child{transform:translateX(8px)}.feature-pair:hover span:last-child{transform:translateX(-8px)}
 @media(max-width:700px){.story-image{min-height:288px}.story-image:before{width:192px;height:192px}.story-image:after{width:256px;height:256px}.story-image span{font-size:56px}.scene-number{font-size:64px}}
 @media(prefers-reduced-motion:reduce){.hero-photo img,.hero-copy h1,.story-image.is-revealed,.section-head.is-revealed,.step.is-revealed{animation:none}.feature-pair:hover span,.scene:hover .scene-number{transform:none}}
+
+
+/* Mobile reading and booking. Spacing uses the 8px scale. */
+.mobile-booking{display:none}
+@media(max-width:700px){
+ body{padding-bottom:calc(80px + env(safe-area-inset-bottom, 0px))}
+ .mobile-booking{position:fixed;z-index:20;inset:auto 0 0;display:grid;grid-template-columns:minmax(0,1fr) minmax(144px,1fr);align-items:center;gap:var(--s2);min-height:80px;padding:var(--s1) var(--s3) calc(var(--s1) + env(safe-area-inset-bottom, 0px));background:var(--paper);border-top:1px solid var(--line);box-shadow:0 -8px 24px #172b2217}
+ .mobile-booking div{display:flex;align-items:baseline;flex-wrap:wrap;column-gap:var(--s1);line-height:1.4}.mobile-booking div span{width:100%;font-size:12px;color:var(--muted)}.mobile-booking strong{font-size:20px;color:var(--deep)}.mobile-booking small{font-size:11px}.mobile-booking a{display:flex;align-items:center;justify-content:center;gap:var(--s2);min-height:48px;padding:var(--s1) var(--s2);background:var(--deep);color:#fff;text-decoration:none;font-weight:600}.mobile-booking a:focus-visible{outline-offset:2px}
+ .hero-photo{height:320px;min-height:320px}.hero-copy{padding:var(--s4) var(--s3) var(--s6)}.hero-copy h1{font-size:clamp(24px,6.4vw,28px);line-height:1.55}.hero-copy>p{font-size:16px}.hero-copy .eyebrow{line-height:1.6}.hero .tags{gap:var(--s1);margin:var(--s3) 0}.hero .button{min-height:56px}
+ .scene{grid-template-columns:minmax(0,1fr) minmax(112px,40%);align-items:stretch;min-height:0}.scene-copy{min-width:0;padding:var(--s2)}.scene-photo{width:100%;height:auto;min-height:0;aspect-ratio:1;align-self:center}.scene-name{line-height:1.4}.scene-copy p{font-size:15px}.scene-section .after{margin-top:var(--s4)}
+ .point-copy{padding:var(--s3)}.pricebox dl div,.access dl div{gap:var(--s1)}.faq summary{min-height:64px}.cta .button{min-height:56px;width:min(100%,320px)}.map{display:block}.story-image small{font-size:10px;text-align:center}
+}
+@media(max-width:360px){.mobile-booking{padding-inline:var(--s2);grid-template-columns:minmax(0,1fr) minmax(128px,1fr)}.mobile-booking strong{font-size:18px}.hero-copy h1{font-size:24px}.scene{grid-template-columns:minmax(0,1fr) minmax(104px,40%)}}
