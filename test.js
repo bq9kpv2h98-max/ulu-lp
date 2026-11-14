@@ -28,6 +28,9 @@ for (const [path, heading, src] of [['/index.html', 'やりたいことを', 'lp
   assert.ok(pageHtml.includes('class="mobile-booking"'));
   assert.ok(pageHtml.includes('class="desktop-left"'));
   assert.ok(pageHtml.includes('class="desktop-right"'));
+  assert.equal((pageHtml.match(/assets\/ulu-clinic-logo-black\.svg/g) || []).length, 2);
+  assert.equal((pageHtml.match(/assets\/ulu-clinic-logo-white\.svg/g) || []).length, 1);
+  for (const logo of ['ulu-clinic-logo-black.svg','ulu-clinic-logo-white.svg']) assert.ok(fs.existsSync('assets/' + logo));
   for (const id of ['top','vision','scenes','method','first-visit','price','access','faq']) assert.ok(target.innerHTML.includes('id="' + id + '"'), `${path}: missing section ${id}`);
   for (const image of positions) assert.ok(fs.existsSync('assets/' + image.split(':')[0]), `${path}: missing scene image`);
   assert.ok(target.innerHTML.includes('ULU METHOD'));
