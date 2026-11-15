@@ -17,6 +17,6 @@ for (const [filename, description] of Object.entries(descriptions)) {
     .replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${description}">`)
     .replace(/<main id="app">[\s\S]*?<\/main>/, `<main id="app">${main.innerHTML}</main>`)
     .replace(/<script defer src="(?:app|motion)\.js\?v=\d+"><\/script>/, '<script defer src="motion.js?v=1"></script>')
-    .replace(/style\.css\?v=\d+/, 'style.css?v=11');
+    .replace(/style\.css\?v=\d+/, 'style.css?v=12');
   fs.writeFileSync(filename, html);
 }
