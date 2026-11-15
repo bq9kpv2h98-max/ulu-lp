@@ -8,6 +8,7 @@ assert.match(html, /https:\/\/lin\.ee\/pum599o/);
 assert.match(html, /https:\/\/appointment-system\.net\/book\?src=lp_top/);
 assert.match(html, /4,980円（税込）/);
 assert.match(html, /GTM-WN6FW2GV/);
+assert.match(html, /family=Shippori\+Mincho/);
 const css = fs.readFileSync('training.css', 'utf8');
 assert.doesNotMatch(css, /filter\s*:\s*grayscale\(/);
 for (const match of html.matchAll(/(?:src|href)="(assets\/[^"?#]+|training\.css)(?:\?[^"#]*)?"/g)) assert.ok(fs.existsSync(match[1]), match[1]);
