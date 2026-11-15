@@ -11,7 +11,7 @@ for (const [file, theme, source] of [
   assert.ok(html.includes(`data-theme="${theme}"`));
   assert.ok(html.includes(`appointment-system.net/book?src=${source}`));
   assert.ok(html.includes('https://lin.ee/pum599o'));
-  assert.ok(html.includes('style.css?v=12'));
+  assert.ok(html.includes('style.css?v=13'));
   assert.ok(html.includes('<span class="hero-location">姫路市田寺東</span>'));
   assert.ok(html.includes('GTM-WN6FW2GV'));
   assert.ok(css.includes(`body[data-theme="${theme}"]`));
