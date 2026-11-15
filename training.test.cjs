@@ -1,0 +1,10 @@
+const fs = require('node:fs');
+const assert = require('node:assert/strict');
+const html = fs.readFileSync('training.html', 'utf8');
+assert.match(html, /<title>姫路の機能改善パーソナルトレーニング/);
+assert.match(html, /<meta name="viewport"/);
+assert.match(html, /運動初心者も歓迎/);
+assert.match(html, /https:\/\/lin\.ee\/pum599o/);
+for (const match of html.matchAll(/(?:src|href)="(assets\/[^"?#]+|training\.css)"/g)) assert.ok(fs.existsSync(match[1]), match[1]);
+assert.doesNotMatch(html, /保険/);
+console.log('training LP checks passed');
