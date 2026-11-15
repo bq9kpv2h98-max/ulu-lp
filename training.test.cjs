@@ -5,6 +5,9 @@ assert.match(html, /<title>姫路の機能改善パーソナルトレーニン�
 assert.match(html, /<meta name="viewport"/);
 assert.match(html, /運動初心者も歓迎/);
 assert.match(html, /https:\/\/lin\.ee\/pum599o/);
+assert.match(html, /https:\/\/appointment-system\.net\/book\?src=lp_top/);
+assert.match(html, /4,980円（税込）/);
+assert.match(html, /GTM-WN6FW2GV/);
 for (const match of html.matchAll(/(?:src|href)="(assets\/[^"?#]+|training\.css)"/g)) assert.ok(fs.existsSync(match[1]), match[1]);
 assert.doesNotMatch(html, /保険/);
 console.log('training LP checks passed');

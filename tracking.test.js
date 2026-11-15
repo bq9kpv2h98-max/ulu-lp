@@ -17,7 +17,7 @@ function setup(pathname) {
   });
   return { window, click: target => onClick({ target }) };
 }
-for (const [path, page] of [['/index.html', 'general'], ['/back.html', 'back'], ['/shoulder.html', 'shoulder']]) {
+for (const [path, page] of [['/index.html', 'general'], ['/back.html', 'back'], ['/shoulder.html', 'shoulder'], ['/training.html', 'training']]) {
   const t = setup(path);
   t.click(new TestElement('https://appointment-system.net/book?src=test&name=private', '.mobile-booking'));
   assert.deepEqual(JSON.parse(JSON.stringify(t.window.dataLayer[0])), {event:'booking_click', lp_type:page, link_area:'mobile_fixed'});
