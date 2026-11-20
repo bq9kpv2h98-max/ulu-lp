@@ -21,7 +21,7 @@ for (const [path, heading, src] of [['/index.html', 'やりたいことを', 'lp
   const photos = [...target.innerHTML.matchAll(/<img src="assets\/([^"]+)/g)].map(m => m[1]);
   assert.equal(new Set(photos).size, photos.length, `${path}: repeated image`);
   assert.ok(fs.readFileSync(path.slice(1), 'utf8').includes('data-theme="' + (src === 'lp_top' ? 'general' : src === 'lp_youtu' ? 'back' : 'shoulder') + '"'));
-  assert.equal((target.innerHTML.match(/初回予約はこちら/g) || []).length, 3);
+  assert.equal((target.innerHTML.match(/初回の空き枠を見る/g) || []).length, 3);
   assert.equal((target.innerHTML.match(new RegExp('https://appointment-system.net/book\\?src=' + src, 'g')) || []).length, 3);
   const pageHtml = fs.readFileSync(path.slice(1), 'utf8');
   assert.equal((pageHtml.match(new RegExp('https://appointment-system.net/book\\?src=' + src, 'g')) || []).length, 6, `${path}: all booking links`);
@@ -29,8 +29,10 @@ for (const [path, heading, src] of [['/index.html', 'やりたいことを', 'lp
   assert.ok(pageHtml.includes('GTM-WN6FW2GV'));
   assert.ok(pageHtml.includes('tracking.js'));
   assert.ok(pageHtml.includes('<span>駐車場あり</span>'));
-  assert.equal((pageHtml.match(/予約前にLINEで相談する/g) || []).length, 2);
-  assert.ok(pageHtml.includes('LINEでのご相談はこちら'));
+  assert.equal((pageHtml.match(/予約前にLINEで相談する/g) || []).length, 3);
+  assert.ok(!pageHtml.includes('着替えスペース'));
+  assert.ok(pageHtml.includes('姫路市田寺東で、整体と運動をひとつの場所で。'));
+  assert.equal((target.innerHTML.match(/class="scene-title"/g) || []).length, 6);
   assert.ok(!pageHtml.includes('<main id="app"></main>'));
   assert.ok(pageHtml.includes(heading));
   assert.ok(pageHtml.includes('<main id="app">' + target.innerHTML + '</main>'), `${path}: static HTML matches the source`);
@@ -46,7 +48,7 @@ for (const [path, heading, src] of [['/index.html', 'やりたいことを', 'lp
   for (const logo of ['ulu-clinic-logo-black.svg','ulu-clinic-logo-white.svg']) assert.ok(fs.existsSync('assets/' + logo));
   for (const id of ['top','vision','scenes','method','first-visit','price','access','faq']) assert.ok(target.innerHTML.includes('id="' + id + '"'), `${path}: missing section ${id}`);
   for (const image of positions) assert.ok(fs.existsSync('assets/' + image.split(':')[0]), `${path}: missing scene image`);
-  assert.ok(target.innerHTML.includes('ULU METHOD'));
+  assert.ok(target.innerHTML.includes('整体と運動'));
   assert.equal((target.innerHTML.match(/class="button shimmer-button"/g) || []).length, 3);
   assert.ok(target.innerHTML.includes('maps.google.com/maps?q='));
   assert.ok(target.innerHTML.includes('google.com/maps/search/'));
