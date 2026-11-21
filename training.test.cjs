@@ -6,7 +6,7 @@ assert.match(html, /<meta name="viewport"/);
 assert.match(html, /運動初心者も歓迎/);
 assert.match(html, /https:\/\/lin\.ee\/pum599o/);
 assert.match(html, /https:\/\/appointment-system\.net\/book\?src=lp_top/);
-assert.match(html, /4,980円（税込）/);
+assert.match(html, /2,980円（税込）/);
 assert.match(html, /GTM-WN6FW2GV/);
 assert.match(html, /family=Shippori\+Mincho/);
 const css = fs.readFileSync('training.css', 'utf8');
